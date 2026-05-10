@@ -1,8 +1,16 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+}
+
+// Читаем local.properties
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) load(file.inputStream())
 }
 
 android {
@@ -19,6 +27,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Ключи из local.properties в BuildConfig
+        buildConfigField("String", "APPMETRICA_API_KEY",
+            "\"${localProperties["appmetrica_api_key"] ?: ""}\"")
+        buildConfigField("String", "YANDEX_MAPKIT_API_KEY",
+            "\"${localProperties["yandex_mapkit_api_key"] ?: ""}\"")
+        buildConfigField("String", "VK_APP_ID",
+            "\"${localProperties["vk_app_id"] ?: ""}\"")
+        buildConfigField("String", "YANDEX_CLIENT_ID",
+            "\"${localProperties["yandex_client_id"] ?: ""}\"")
     }
 
     buildTypes {
@@ -40,6 +58,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
