@@ -82,8 +82,25 @@ dependencies {
     implementation(libs.navigation.ui.ktx)
     implementation(libs.fragment.ktx)
 
+    // Задание 1 — AppMetrica аналитика
+    implementation(libs.appmetrica.analytics)
+
+    // Задание 2 — VK авторизация
+    implementation(libs.vk.sdk.core)
+    implementation(libs.vk.sdk.api)
+
+    // Задание 2 — Яндекс авторизация
+    implementation(libs.yandex.authsdk)
+
+    // Задание 2 — Безопасное хранение токенов
+    implementation(libs.security.crypto)
+
+    // Задание 3 — Яндекс MapKit
+    implementation(libs.yandex.mapkit)
+
     testImplementation(libs.junit)
     testImplementation(libs.konsist)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
