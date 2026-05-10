@@ -18,8 +18,6 @@ dependencyResolutionManagement {
         mavenCentral()
         // VK Android SDK
         maven { url = uri("https://artifactory.vk.com/artifactory/maven/") }
-        // Yandex MapKit
-        maven { url = uri("https://artifactory.mapsapi.ru/repository/maven/") }
     }
 }
 

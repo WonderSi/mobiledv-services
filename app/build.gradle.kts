@@ -31,8 +31,8 @@ android {
         // Ключи из local.properties в BuildConfig
         buildConfigField("String", "APPMETRICA_API_KEY",
             "\"${localProperties["appmetrica_api_key"] ?: ""}\"")
-        buildConfigField("String", "YANDEX_MAPKIT_API_KEY",
-            "\"${localProperties["yandex_mapkit_api_key"] ?: ""}\"")
+        buildConfigField("String", "MAPS_API_KEY",
+            "\"${localProperties["maps_api_key"] ?: ""}\"")
         buildConfigField("String", "VK_APP_ID",
             "\"${localProperties["vk_app_id"] ?: ""}\"")
         buildConfigField("String", "YANDEX_CLIENT_ID",
@@ -96,7 +96,9 @@ dependencies {
     implementation(libs.security.crypto)
 
     // Задание 3 — Яндекс MapKit
-    implementation(libs.yandex.mapkit)
+    // Задание 3 — Google Maps + геолокация
+    implementation(libs.google.maps)
+    implementation(libs.google.location)
 
     testImplementation(libs.junit)
     testImplementation(libs.konsist)
