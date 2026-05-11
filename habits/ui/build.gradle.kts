@@ -22,6 +22,7 @@ dependencies {
     coreLibraryDesugaring(libs.android.desugar.jdk.libs)
 
     implementation(project(":habits:domain"))
+    implementation(project(":core"))
     implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
 
@@ -37,4 +38,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.cardview)
     implementation(libs.androidx.core.ktx)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
 }

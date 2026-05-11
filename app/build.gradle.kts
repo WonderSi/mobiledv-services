@@ -37,6 +37,9 @@ android {
             "\"${localProperties["vk_app_id"] ?: ""}\"")
         buildConfigField("String", "YANDEX_CLIENT_ID",
             "\"${localProperties["yandex_client_id"] ?: ""}\"")
+
+        // Yandex Auth SDK требует этот плейсхолдер в манифесте
+        manifestPlaceholders["YANDEX_CLIENT_ID"] = localProperties["yandex_client_id"] ?: ""
     }
 
     buildTypes {
