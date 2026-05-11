@@ -52,7 +52,7 @@ class HabitListViewModelTest {
         analytics = FakeAnalyticsService()
         viewModel = HabitListViewModel(
             getAllHabitsUseCase = GetAllHabitsUseCase(fakeHabitRepository),
-            toggleHabitCompletionUseCase = ToggleHabitCompletionUseCase(fakeRecordRepository, fakeHabitRepository),
+            toggleHabitCompletionUseCase = ToggleHabitCompletionUseCase(fakeHabitRepository, fakeRecordRepository),
             habitRecordRepository = fakeRecordRepository,
             analyticsService = analytics
         )
