@@ -1,3 +1,10 @@
+import java.util.Properties
+
+val localProps = Properties().apply {
+    val file = File(rootDir, "local.properties")
+    if (file.exists()) load(file.inputStream())
+}
+
 pluginManagement {
     repositories {
         google {
@@ -16,8 +23,16 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        // VK Android SDK
-        maven { url = uri("https://artifactory.vk.com/artifactory/maven/") }
+        // VK ID SDK
+        maven { url = uri("https://artifactory-external.vkpartner.ru/artifactory/vkid-sdk-android/") }
+        // Yandex MapKit (требует GitHub авторизацию)
+        maven {
+            url = uri("https://maven.pkg.github.com/yandex/mapkit-android-demo")
+            credentials {
+                username = localProps["github_user"]?.toString() ?: ""
+                password = localProps["github_token"]?.toString() ?: ""
+            }
+        }
     }
 }
 

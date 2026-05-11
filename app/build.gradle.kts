@@ -31,12 +31,20 @@ android {
         // Ключи из local.properties в BuildConfig
         buildConfigField("String", "APPMETRICA_API_KEY",
             "\"${localProperties["appmetrica_api_key"] ?: ""}\"")
-        buildConfigField("String", "MAPS_API_KEY",
-            "\"${localProperties["maps_api_key"] ?: ""}\"")
+        buildConfigField("String", "YANDEX_MAPKIT_API_KEY",
+            "\"${localProperties["yandex_mapkit_api_key"] ?: ""}\"")
         buildConfigField("String", "VK_APP_ID",
             "\"${localProperties["vk_app_id"] ?: ""}\"")
         buildConfigField("String", "YANDEX_CLIENT_ID",
             "\"${localProperties["yandex_client_id"] ?: ""}\"")
+
+        // VK ID SDK требует manifest placeholders
+        val vkAppId = localProperties["vk_app_id"]?.toString()?.filter { it.isDigit() } ?: "0"
+        val vkClientSecret = localProperties["vk_client_secret"]?.toString() ?: ""
+        manifestPlaceholders["VKIDClientID"] = vkAppId
+        manifestPlaceholders["VKIDClientSecret"] = vkClientSecret
+        manifestPlaceholders["VKIDRedirectHost"] = "vk.com"
+        manifestPlaceholders["VKIDRedirectScheme"] = "vk${vkAppId}"
 
         // Yandex Auth SDK требует этот плейсхолдер в манифесте
         manifestPlaceholders["YANDEX_CLIENT_ID"] = localProperties["yandex_client_id"] ?: ""
@@ -89,8 +97,7 @@ dependencies {
     implementation(libs.appmetrica.analytics)
 
     // Задание 2 — VK авторизация
-    implementation(libs.vk.sdk.core)
-    implementation(libs.vk.sdk.api)
+    implementation(libs.vkid)
 
     // Задание 2 — Яндекс авторизация
     implementation(libs.yandex.authsdk)
@@ -99,9 +106,8 @@ dependencies {
     implementation(libs.security.crypto)
 
     // Задание 3 — Яндекс MapKit
-    // Задание 3 — Google Maps + геолокация
-    implementation(libs.google.maps)
-    implementation(libs.google.location)
+    // Задание 3 — Yandex MapKit
+    implementation(libs.yandex.mapkit)
 
     testImplementation(libs.junit)
     testImplementation(libs.konsist)
